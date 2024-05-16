@@ -1,1 +1,1 @@
-skibidi
+print('skibidi toilet')
