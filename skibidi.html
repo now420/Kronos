@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skibidi Browser Home Page</title>
+    <title>Skibidi Browser</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,13 +35,24 @@
             background-color: #4a8bda;
         }
     </style>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const query = document.getElementById('search-input').value;
+            if (query.startsWith('http://') || query.startsWith('https://')) {
+                window.location.href = query;
+            } else {
+                window.location.href = 'https://duckduckgo.com/?q=' + encodeURIComponent(query);
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="search-container">
         <h1>Skibidi Browser</h1>
-        <form action="https://duckduckgo.com/" method="get">
-            <input type="text" name="q" placeholder="skibidi browser">
-            <input type="submit" value="Search">
+        <form onsubmit="handleFormSubmit(event)">
+            <input type="text" id="search-input" name="q" placeholder="Enter URL or Search Query">
+            <input type="submit" value="Go">
         </form>
     </div>
 </body>
