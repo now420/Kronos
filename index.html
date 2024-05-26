@@ -318,6 +318,68 @@ body {
   </style>
 <link href="data:text/css,%3Ais(%5Bid*%3D'google_ads_iframe'%5D%2C%5Bid*%3D'taboola-'%5D%2C.taboolaHeight%2C.taboola-placeholder%2C%23credential_picker_container%2C%23credentials-picker-container%2C%23credential_picker_iframe%2C%5Bid*%3D'google-one-tap-iframe'%5D%2C%23google-one-tap-popup-container%2C.google-one-tap-modal-div%2C%23amp_floatingAdDiv%2C%23ez-content-blocker-container)%20%7Bdisplay%3Anone!important%3Bmin-height%3A0!important%3Bheight%3A0!important%3B%7D" rel="stylesheet" type="text/css"></head>
 <body>
+     <div class="box-outline"></div>
+        <div class="line"></div>
+    </div>
+<style>
+  .box-outline {
+    width: 50px; /* Adjust the width of the box */
+    height: 80px; /* Adjust the height of the box */
+    border: 2px solid white; /* Adjust the border properties as needed */
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none; /* Ensure the box doesn't interfere with mouse events */
+    outline: 2px solid black; /* Add the outline with desired properties */
+}
+
+
+.line {
+    width: 2px; /* Adjust the width of the line */
+    height: 80px; /* Ensure the line covers the entire height */
+    background: linear-gradient(to top, red, green); /* Adjust the gradient colors as needed */
+    position: fixed;
+    z-index: 9998;
+    pointer-events: none; /* Ensure the line doesn't interfere with mouse events */
+}
+
+body {
+  background-color: blue;
+}
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const boxOutline = document.querySelector('.box-outline');
+    const line = document.querySelector('.line');
+
+    document.addEventListener('mousemove', function(e) {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        const boxWidth = boxOutline.offsetWidth;
+        const boxHeight = boxOutline.offsetHeight;
+        const boxOffset = 10; // Adjust the offset as needed
+
+        // Position the box outline around the mouse cursor
+        boxOutline.style.left = mouseX - boxWidth / 2 + 'px';
+        boxOutline.style.top = mouseY - boxHeight / 2 + 'px';
+
+        // Position the line to the right of the box outline
+        line.style.left = mouseX + boxWidth / 2 + boxOffset + 'px';
+        line.style.top = mouseY - line.offsetHeight / 2 + 'px';
+
+        // Show box and line on mouse move
+        boxOutline.style.display = 'block';
+        line.style.display = 'block';
+    });
+
+    // Hide box and line on mouse out
+    document.addEventListener('mouseout', function() {
+        boxOutline.style.display = 'none';
+        line.style.display = 'none';
+    });
+});
+</script>
     <!-- Back to Top -->
     <a href="#home"><button id="backToTop" style="display: none;"><i class="fa-solid fa-arrow-up"></i></button></a>
 
